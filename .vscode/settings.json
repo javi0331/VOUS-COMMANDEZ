@@ -1,0 +1,43 @@
+{
+    // ── C++ estándar ──────────────────────────────────────────
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.cStandard": "c17",
+
+    // ── Compilador ────────────────────────────────────────────
+    // Ajustar si MinGW está en otra ruta
+    "C_Cpp.default.compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
+
+    // ── IntelliSense ──────────────────────────────────────────
+    // Esto resuelve los errores de <chrono>, <limits>, etc.
+    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+    "C_Cpp.intelliSenseEngine": "default",
+
+    // Incluye todas las subcarpetas del proyecto
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/src/core",
+        "${workspaceFolder}/src/models",
+        "${workspaceFolder}/src/algorithms",
+        "${workspaceFolder}/src/structures",
+        "${workspaceFolder}/src/simulation",
+        "${workspaceFolder}/src/utils",
+        "${workspaceFolder}/src/visual",
+        "C:/msys64/ucrt64/include"
+    ],
+
+    // ── Editor ────────────────────────────────────────────────
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "*.h":   "cpp",
+        "*.cpp": "cpp"
+    },
+
+    // Excluir carpetas de búsqueda para no ralentizar VSCode
+    "files.exclude": {
+        "**/build/**": true,
+        "**/.git/**":  true
+    },
+
+    // ── Terminal ──────────────────────────────────────────────
+    "terminal.integrated.defaultProfile.windows": "Command Prompt"
+}

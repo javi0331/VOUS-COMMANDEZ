@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"name": "build",
+			"path": "../../build"
+		},
+		{
+			"name": "C1_VOUSCOMMANDEZ",
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.h": "cpp",
+			"*.cpp": "cpp"
+		},
+		"terminal.integrated.defaultProfile.windows": "Command Prompt"
+	}
+}

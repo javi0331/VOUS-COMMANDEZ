@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/src/**",
+                "${workspaceFolder}/src/core",
+                "${workspaceFolder}/src/models",
+                "${workspaceFolder}/src/algorithms",
+                "${workspaceFolder}/src/structures",
+                "${workspaceFolder}/src/simulation",
+                "${workspaceFolder}/src/utils",
+                "${workspaceFolder}/src/visual",
+                "C:/msys64/ucrt64/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}
