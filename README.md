@@ -22,8 +22,7 @@
 11. [Utilidades](#11-utilidades)
 12. [Parámetros de configuración (Config.h)](#12-parámetros-de-configuración-configh)
 13. [Compilación y ejecución](#13-compilación-y-ejecución)
-14. [Bugs conocidos y fixes](#14-bugs-conocidos-y-fixes)
-15. [Glosario](#15-glosario)
+14. [Glosario](#14-glosario)
 
 ---
 
@@ -829,64 +828,7 @@ cd build
 
 ---
 
-## 14. Bugs conocidos y fixes
-
-### Bug 1 — Pausa no detiene las animaciones
-
-**Síntoma:** Al presionar "Pausa", la simulación lógica se detiene pero los dealers siguen moviéndose en pantalla.
-
-**Causa:** `animations.update(simDelta)` se llama con `simDelta = realDt × simulationSpeed`, donde `getSimulationSpeed()` retorna el multiplicador numérico incluso cuando la simulación está pausada.
-
-**Fix en `src/visual/RendererSFML.cpp`, método `update()`:**
-```cpp
-void RendererSFML::update(float realDt) {
-    camera.update(realDt);
-    simulator.tick(realDt);
-    syncAnimations();
-
-    if (!simulator.getTimeSystem().isPaused()) {   // ← FIX
-        float simDelta = realDt * static_cast<float>(
-            simulator.getTimeSystem().getSimulationSpeed());
-        animations.update(simDelta);
-    }
-}
-```
-
----
-
-### Bug 2 — Dealer aparece de color gris
-
-**Síntoma:** Durante unos segundos, el dealer se muestra en gris en lugar de tener un color indicativo de su estado.
-
-**Causa:** El `switch` en `drawDealer()` no tiene case para `DealerStatus::PICKING_UP`, que es el estado durante los 3 minutos de espera en el restaurante. Cae al `default` → gris.
-
-**Fix en `src/visual/RendererSFML.cpp`, método `drawDealer()`:**
-```cpp
-case DealerStatus::PICKING_UP:
-    fill = sf::Color(255, 160, 30);  break;   // naranja cálido = recogiendo pedido
-```
-
----
-
-### Bug 3 — Tiempos promedio de entrega muy altos
-
-**Síntoma:** El panel muestra tiempos promedio de 60–120 min cuando deberían ser ~20–30 min.
-
-**Causa:** `GraphLoader.cpp` interpreta los pesos del CSV como kilómetros y aplica la fórmula `(weight / 30.0) * 60.0`, convirtiendo un peso de 10 en 20 minutos. Pero los pesos ya representan minutos directamente.
-
-**Fix en `src/core/GraphLoader.cpp`:**
-```cpp
-// ANTES (incorrecto — duplica el tiempo):
-double baseTime = (weight / 30.0) * 60.0;
-
-// DESPUÉS (correcto — peso ya es minutos):
-double baseTime   = weight;
-double distanceKm = (weight / 60.0) * Config::DEALER_SPEED_KMH;
-```
-
----
-
-## 15. Glosario
+## 14. Glosario
 
 | Término | Significado |
 |---------|-------------|
