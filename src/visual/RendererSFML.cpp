@@ -155,12 +155,15 @@ void RendererSFML::update(float realDt) {
     simulator.tick(realDt);
 
     syncAnimations();
+    
 
-    float simDelta = realDt
-        * static_cast<float>(
-            simulator.getTimeSystem().getSimulationSpeed()
-          );
-    animations.update(simDelta);
+    if (!simulator.getTimeSystem().isPaused()) {
+        float simDelta = realDt
+            * static_cast<float>(
+                simulator.getTimeSystem().getSimulationSpeed()
+              );
+        animations.update(simDelta);
+    }
 }
 
 // ── Render ────────────────────────────────────────────────────
@@ -413,15 +416,19 @@ void RendererSFML::drawDealer(
 
     sf::Color fill;
     switch (dealer.getStatus()) {
-        case DealerStatus::IDLE:
-            fill = sf::Color(100, 255, 100); break;       // verde = libre
-        case DealerStatus::HEADING_TO_RESTAURANT:
-            fill = sf::Color(255, 200, 50);  break;       // amarillo = yendo a restaurante
-        case DealerStatus::DELIVERING:
-            fill = sf::Color(255, 100, 50);  break;       // naranja = entregando
-        default:
-            fill = sf::Color(200, 200, 200); break;
-    }
+    case DealerStatus::IDLE:
+        fill = sf::Color(100, 255, 100); break;        // verde = libre
+    case DealerStatus::HEADING_TO_RESTAURANT:
+        fill = sf::Color(255, 200, 50);  break;        // amarillo = yendo a restaurante
+    case DealerStatus::PICKING_UP:
+        fill = sf::Color(255, 160, 30);  break;        // naranja cálido = recogiendo
+    case DealerStatus::DELIVERING:
+        fill = sf::Color(255, 100, 50);  break;        // naranja rojo = entregando
+    case DealerStatus::RETURNING:
+        fill = sf::Color(100, 200, 255); break;        // azul claro = regresando
+    default:
+        fill = sf::Color(200, 200, 200); break;
+}
 
     dealerShape.setFillColor(fill);
     dealerShape.setOutlineColor(isSelected

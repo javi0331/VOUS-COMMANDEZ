@@ -1,4 +1,5 @@
 #include "../core/GraphLoader.h"
+#include "../utils/Config.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -70,9 +71,7 @@ Graph GraphLoader::loadFromCSV(
         }
     }
 
-    // ── Aristas ───────────────────────────────────────────────
-    // Formato: source,target,weight,bidirectional
-    {
+{
         std::ifstream file(edgesPath);
         if (!file.is_open())
             throw std::runtime_error("No se pudo abrir: " + edgesPath);
@@ -95,16 +94,16 @@ Graph GraphLoader::loadFromCSV(
             bool     bi     = (biStr.find('1') != std::string::npos);
             RoadType road   = roadTypeFromWeight(weight);
 
-            // baseTime en minutos: distancia / velocidad promedio (km/h → min)
-            // Velocidad estimada 30 km/h en ciudad
-            double baseTime = (weight / 30.0) * 60.0;
+            // FIX: el peso del CSV ya es minutos directamente.
+            // Se deriva la distancia en km desde el tiempo y la velocidad.
+            double baseTime   = weight;
+            double distanceKm = (weight / 60.0) * Config::DEALER_SPEED_KMH;
 
-            graph.addEdge(Edge(from, to, weight, baseTime, road));
+            graph.addEdge(Edge(from, to, distanceKm, baseTime, road));
             if (bi) {
-                graph.addEdge(Edge(to, from, weight, baseTime, road));
+                graph.addEdge(Edge(to, from, distanceKm, baseTime, road));
             }
         }
     }
-
     return graph;
 }
