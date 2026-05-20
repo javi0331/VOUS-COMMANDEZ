@@ -22,7 +22,7 @@
 
 #include "../algorithms/RouteResult.h"
 
-// Estadísticas globales de la simulación (para la UI)
+// Estadisticas globales de la simulacion (para la UI)
 struct SimStats {
     int    totalOrdersGenerated = 0;
     int    totalDelivered       = 0;
@@ -33,54 +33,72 @@ struct SimStats {
     double avgWaitTime          = 0.0;
 };
 
+// ── Fase de entrega por dealer ────────────────────────────────
+// El ciclo de vida de una orden tiene tres fases visuales:
+//
+//  HEADING_TO_RESTAURANT
+//    Dealer se mueve desde su posicion hasta el restaurante.
+//    Timer: tiempo de la ruta dealer→restaurante (Dijkstra).
+//
+//  PICKING_UP
+//    Dealer llega al restaurante y espera DEALER_PICKUP_TIME minutos.
+//    Durante este tiempo el punto rojo (restaurante) permanece visible.
+//    El dealer esta estatico en el nodo del restaurante.
+//
+//  DELIVERING
+//    Dealer se mueve desde el restaurante hasta el cliente.
+//    Timer: tiempo de la ruta restaurante→cliente (Dijkstra).
+//
+enum class DeliveryPhase {
+    HEADING_TO_RESTAURANT,
+    PICKING_UP,
+    DELIVERING
+};
+
+struct DealerPhaseState {
+    DeliveryPhase phase     = DeliveryPhase::HEADING_TO_RESTAURANT;
+    double        phaseTimer = 0.0;  // minutos simulados restantes en fase actual
+    std::string   orderId;           // orden en curso
+};
+
 // Orquesta todos los sistemas. El render loop llama a tick()
 // con el delta real de SFML, y consulta el estado para dibujar.
-//
-// Loop externo (RendererSFML):
-//   while (window.isOpen()) {
-//       float dt = clock.restart().asSeconds();
-//       simulator.tick(dt);
-//       renderer.draw(simulator);
-//   }
 
 class Simulator {
 private:
-    // ── Core ──────────────────────────────────────────────────
     const Graph& graph;
 
-    // ── Sistemas de simulación ────────────────────────────────
     TimeSystem    timeSystem;
     WeatherSystem weatherSystem;
     TrafficSystem trafficSystem;
     EventSystem   eventSystem;
     OrderGenerator orderGenerator;
 
-    // ── Estructuras de datos ──────────────────────────────────
     HeapDealers          heapDealers;
     PriorityQueueOrders  pendingOrders;
     AVLRestaurants       avlRestaurants;
     DeliveryHistory      deliveryHistory;
 
-    // ── Registros en memoria ──────────────────────────────────
     std::unordered_map<std::string, Order>      orders;
     std::unordered_map<std::string, Dealer>     dealers;
     std::unordered_map<std::string, Restaurant> restaurants;
     std::unordered_map<std::string, Client>     clients;
 
-    // ── Estado ────────────────────────────────────────────────
-    bool    running;
+    // Fase actual por dealer — separada del modelo Dealer
+    // para no contaminar el modelo de datos con logica visual
+    std::unordered_map<std::string, DealerPhaseState> dealerPhases;
+
+    bool     running;
     SimStats stats;
 
-    // Intervalo en minutos simulados para boost de órdenes viejas
     double boostCheckTimer;
-    static constexpr double BOOST_INTERVAL   = 5.0;  // cada 5 min sim
-    static constexpr double STALE_THRESHOLD  = 10.0; // orden espera 10 min
-    static constexpr int    BOOST_AMOUNT     = 2;    // +2 prioridad
+    static constexpr double BOOST_INTERVAL   = 5.0;
+    static constexpr double STALE_THRESHOLD  = 10.0;
+    static constexpr int    BOOST_AMOUNT     = 2;
 
 public:
     explicit Simulator(const Graph& graph);
 
-    // ── Setup (llamar antes de start()) ───────────────────────
     void addDealer(const Dealer& dealer);
     void addRestaurant(const Restaurant& restaurant);
     void addClient(const Client& client);
@@ -90,11 +108,8 @@ public:
     void resume();
     void reset();
 
-    // ── Loop principal ────────────────────────────────────────
-    // realDeltaSeconds: tiempo real desde el último frame (SFML dt)
     void tick(double realDeltaSeconds);
 
-    // ── Acceso al estado (para RendererSFML / UI) ─────────────
     const TimeSystem&    getTimeSystem()    const;
     const WeatherSystem& getWeatherSystem() const;
     const TrafficSystem& getTrafficSystem() const;
@@ -107,45 +122,29 @@ public:
 
     const SimStats& getStats() const;
 
-    // Calcula la ruta actual de un dealer (para visualización)
+    // Fase actual de un dealer (para que RendererSFML sepa en que tramo esta)
+    const DealerPhaseState* getPhase(const std::string& dealerId) const;
+
     RouteResult getRouteFor(const std::string& dealerId) const;
 
-    // Control manual de clima y eventos desde la UI
     void setWeather(WeatherState state);
     void triggerEvent(EventState event, double durationMinutes);
     const Graph& getGraph() const { return graph; }
     void setSimulationSpeed(double speed) {
-    timeSystem.setSimulationSpeed(speed);
-    
-}
+        timeSystem.setSimulationSpeed(speed);
+    }
 
 private:
-    // ── Pasos internos del tick ───────────────────────────────
-
-    // 1. Genera nuevas órdenes y las ingresa al heap + registro
     void processNewOrders();
-
-    // 2. Asigna órdenes pendientes a dealers disponibles
     void assignOrders();
-
-    // 3. Avanza el estado de cada dealer en tránsito
     void updateDealers(double simDeltaMinutes);
-
-    // 4. Boost de órdenes que llevan mucho esperando
     void boostStaleOrders(double simDeltaMinutes);
 
-    // ── Helpers ───────────────────────────────────────────────
-
-    // Calcula el score logístico para un dealer frente a una orden
-    // Score = α·(1/dist) + β·(1-loadFactor)
     double computeDealerScore(
         const Dealer& dealer,
         const std::string& restaurantNodeId
     ) const;
 
-    // Reconstruye el heap de dealers con scores frescos
-    // para la orden actual
     void rebuildDealerHeap(const std::string& restaurantNodeId);
-
     void updateStats();
 };

@@ -2,17 +2,15 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <functional>
 #include "../simulation/Simulator.h"
 #include "../utils/Config.h"
 
 // Dibuja todo lo que NO es el grafo:
-//   - Panel lateral derecho: stats, controles de clima/evento, historial
-//   - HUD superior: hora simulada, multiplicador de trafico, FPS
-//   - Tooltip al hacer hover sobre un nodo
-//   - Leyenda de colores de dealers y marcadores
-//
-// UI siempre se dibuja en coordenadas de pantalla (sin Camera).
-// Recibe el estado del Simulator por referencia — solo lee, nunca escribe.
+//   - Panel lateral derecho: stats, controles, historial, leyenda
+//   - HUD superior: hora, multiplicador de trafico, FPS
+//   - Boton [?] esquina inferior izquierda -> abre assets/info.html
+//   - Tooltip al hacer hover
 
 class UI {
 private:
@@ -26,6 +24,11 @@ private:
     std::string        tooltipText;
     sf::Vector2f       tooltipPos;
     bool               tooltipVisible;
+
+    // Boton de info — esquina inferior izquierda del mapa
+    sf::RectangleShape infoBtnBg;
+    static constexpr float INFO_BTN_SIZE = 32.f;
+    static constexpr float INFO_BTN_MARGIN = 10.f;
 
     std::function<void()>             onPause;
     std::function<void()>             onResume;
@@ -60,13 +63,14 @@ private:
     void drawPanel     (sf::RenderWindow& w, const Simulator& sim);
     void drawHUD       (sf::RenderWindow& w, const Simulator& sim, float fps);
     void drawTooltip   (sf::RenderWindow& w);
+    void drawInfoButton(sf::RenderWindow& w);
 
     void drawStats     (sf::RenderWindow& w, const SimStats& stats, float y);
     void drawTimeInfo  (sf::RenderWindow& w, const Simulator& sim,  float y);
     void drawTraffic   (sf::RenderWindow& w, const Simulator& sim,  float y);
     void drawControls  (sf::RenderWindow& w, const Simulator& sim,  float y);
     void drawHistory   (sf::RenderWindow& w, const DeliveryHistory& h, float y);
-    void drawLegend    (sf::RenderWindow& w, float y);  // nueva
+    void drawLegend    (sf::RenderWindow& w, float y);
 
     sf::Text makeText(
         const std::string& str,
@@ -84,4 +88,7 @@ private:
     bool isInside(float mx, float my,
                   float rx, float ry,
                   float rw, float rh) const;
+
+    // Abre assets/info.html en el navegador del sistema
+    void openInfoHTML() const;
 };

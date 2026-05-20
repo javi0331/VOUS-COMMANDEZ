@@ -2364,3 +2364,543 @@
 [20:25:54] [INFO   ] Nueva orden ORD_00028 desde R20
 [20:25:59] [INFO   ] Nueva orden ORD_00029 desde R03
 [20:26:02] [INFO   ] VousCommandez cerrado.
+[14:48:40] [INFO   ] Logger inicializado — VousCommandez
+[14:48:40] [INFO   ] Iniciando VousCommandez...
+[14:48:40] [INFO   ] Grafo cargado: 78 nodos, 290 aristas
+[14:48:40] [INFO   ] Verificando nodos de dealers...
+[14:48:40] [INFO   ] Simulator configurado. Iniciando render...
+[14:48:40] [INFO   ] RendererSFML inicializado - ventana 1280x720
+[14:48:45] [INFO   ] Nueva orden ORD_00001 desde R11
+[14:48:45] [INFO   ] Dealer D04 asignado a ORD_00001
+[14:48:49] [INFO   ] Dealer D04 llego al restaurante, recogiendo ORD_00001
+[14:48:54] [INFO   ] Dealer D04 sale del restaurante entregando ORD_00001
+[14:48:59] [INFO   ] Nueva orden ORD_00002 desde R02
+[14:48:59] [INFO   ] Dealer D01 asignado a ORD_00002
+[14:49:03] [INFO   ] Dealer D01 llego al restaurante, recogiendo ORD_00002
+[14:49:07] [INFO   ] Dealer D01 sale del restaurante entregando ORD_00002
+[14:49:12] [INFO   ] Nueva orden ORD_00003 desde R23
+[14:49:12] [INFO   ] Dealer D06 asignado a ORD_00003
+[14:49:23] [INFO   ] Dealer D04 entrego ORD_00001
+[14:49:25] [INFO   ] Nueva orden ORD_00004 desde R24
+[14:49:25] [INFO   ] Dealer D07 asignado a ORD_00004
+[14:49:28] [INFO   ] Dealer D07 llego al restaurante, recogiendo ORD_00004
+[14:49:28] [INFO   ] Dealer D06 llego al restaurante, recogiendo ORD_00003
+[14:49:29] [INFO   ] Dealer D07 sale del restaurante entregando ORD_00004
+[14:49:29] [INFO   ] Dealer D06 sale del restaurante entregando ORD_00003
+[14:49:29] [INFO   ] Nueva orden ORD_00005 desde R18
+[14:49:30] [INFO   ] Dealer D05 asignado a ORD_00005
+[14:49:31] [INFO   ] Nueva orden ORD_00006 desde R10
+[14:49:31] [INFO   ] Dealer D03 asignado a ORD_00006
+[14:49:33] [INFO   ] Dealer D05 llego al restaurante, recogiendo ORD_00005
+[14:49:33] [INFO   ] Dealer D01 entrego ORD_00002
+[14:49:33] [INFO   ] Nueva orden ORD_00007 desde R25
+[14:49:33] [INFO   ] Dealer D02 asignado a ORD_00007
+[14:49:34] [INFO   ] Dealer D05 sale del restaurante entregando ORD_00005
+[14:49:34] [INFO   ] Dealer D07 entrego ORD_00004
+[14:49:35] [INFO   ] Dealer D03 llego al restaurante, recogiendo ORD_00006
+[14:49:35] [INFO   ] Nueva orden ORD_00008 desde R04
+[14:49:35] [INFO   ] Dealer D09 asignado a ORD_00008
+[14:49:36] [INFO   ] Dealer D03 sale del restaurante entregando ORD_00006
+[14:49:37] [INFO   ] Nueva orden ORD_00009 desde R05
+[14:49:37] [INFO   ] Dealer D01 asignado a ORD_00009
+[14:49:39] [INFO   ] Dealer D09 llego al restaurante, recogiendo ORD_00008
+[14:49:39] [INFO   ] Dealer D09 sale del restaurante entregando ORD_00008
+[14:49:39] [INFO   ] Nueva orden ORD_00010 desde R10
+[14:49:39] [INFO   ] Dealer D08 asignado a ORD_00010
+[14:49:40] [INFO   ] Dealer D06 entrego ORD_00003
+[14:49:42] [INFO   ] Nueva orden ORD_00011 desde R12
+[14:49:42] [INFO   ] Dealer D04 asignado a ORD_00011
+[14:49:43] [INFO   ] Dealer D04 llego al restaurante, recogiendo ORD_00011
+[14:49:43] [INFO   ] Dealer D09 entrego ORD_00008
+[14:49:43] [INFO   ] Nueva orden ORD_00012 desde R18
+[14:49:44] [INFO   ] Dealer D10 asignado a ORD_00012
+[14:49:44] [INFO   ] Dealer D04 sale del restaurante entregando ORD_00011
+[14:49:45] [INFO   ] Dealer D02 llego al restaurante, recogiendo ORD_00007
+[14:49:45] [INFO   ] Nueva orden ORD_00013 desde R13
+[14:49:45] [INFO   ] Dealer D09 asignado a ORD_00013
+[14:49:45] [INFO   ] Dealer D01 llego al restaurante, recogiendo ORD_00009
+[14:49:46] [INFO   ] Dealer D02 sale del restaurante entregando ORD_00007
+[14:49:46] [INFO   ] Dealer D01 sale del restaurante entregando ORD_00009
+[14:49:47] [INFO   ] Dealer D04 entrego ORD_00011
+[14:49:47] [INFO   ] Nueva orden ORD_00014 desde R04
+[14:49:47] [INFO   ] Dealer D06 asignado a ORD_00014
+[14:49:48] [INFO   ] Dealer D08 llego al restaurante, recogiendo ORD_00010
+[14:49:48] [INFO   ] Dealer D08 sale del restaurante entregando ORD_00010
+[14:49:49] [INFO   ] Dealer D03 entrego ORD_00006
+[14:49:49] [INFO   ] Nueva orden ORD_00015 desde R09
+[14:49:50] [INFO   ] Dealer D03 asignado a ORD_00015
+[14:49:50] [INFO   ] Dealer D10 llego al restaurante, recogiendo ORD_00012
+[14:49:50] [INFO   ] Dealer D10 sale del restaurante entregando ORD_00012
+[14:49:51] [INFO   ] Dealer D05 entrego ORD_00005
+[14:49:51] [INFO   ] Nueva orden ORD_00016 desde R03
+[14:49:51] [INFO   ] Dealer D07 asignado a ORD_00016
+[14:49:53] [INFO   ] Dealer D01 entrego ORD_00009
+[14:49:53] [INFO   ] Nueva orden ORD_00017 desde R12
+[14:49:54] [INFO   ] Dealer D04 asignado a ORD_00017
+[14:49:54] [INFO   ] Dealer D04 llego al restaurante, recogiendo ORD_00017
+[14:49:54] [INFO   ] Dealer D04 sale del restaurante entregando ORD_00017
+[14:49:55] [INFO   ] Dealer D09 llego al restaurante, recogiendo ORD_00013
+[14:49:55] [INFO   ] Dealer D09 sale del restaurante entregando ORD_00013
+[14:49:55] [INFO   ] Nueva orden ORD_00018 desde R01
+[14:49:55] [INFO   ] Dealer D01 asignado a ORD_00018
+[14:49:57] [INFO   ] Dealer D03 llego al restaurante, recogiendo ORD_00015
+[14:49:57] [INFO   ] Nueva orden ORD_00019 desde R09
+[14:49:57] [INFO   ] Dealer D05 asignado a ORD_00019
+[14:49:58] [INFO   ] Dealer D06 llego al restaurante, recogiendo ORD_00014
+[14:49:58] [INFO   ] Dealer D03 sale del restaurante entregando ORD_00015
+[14:49:58] [INFO   ] Dealer D08 entrego ORD_00010
+[14:49:58] [INFO   ] Dealer D06 sale del restaurante entregando ORD_00014
+[14:49:59] [INFO   ] Dealer D04 entrego ORD_00017
+[14:49:59] [INFO   ] Nueva orden ORD_00020 desde R21
+[14:49:59] [INFO   ] Dealer D04 asignado a ORD_00020
+[14:50:00] [INFO   ] Dealer D07 llego al restaurante, recogiendo ORD_00016
+[14:50:01] [INFO   ] Dealer D07 sale del restaurante entregando ORD_00016
+[14:50:01] [INFO   ] Nueva orden ORD_00021 desde R22
+[14:50:01] [INFO   ] Dealer D08 asignado a ORD_00021
+[14:50:03] [INFO   ] Dealer D02 entrego ORD_00007
+[14:50:04] [INFO   ] Nueva orden ORD_00022 desde R09
+[14:50:04] [INFO   ] Dealer D02 asignado a ORD_00022
+[14:50:05] [INFO   ] Dealer D09 entrego ORD_00013
+[14:50:05] [INFO   ] Dealer D10 entrego ORD_00012
+[14:50:06] [INFO   ] VousCommandez cerrado.
+[15:00:58] [INFO   ] Logger inicializado — VousCommandez
+[15:00:58] [INFO   ] Iniciando VousCommandez...
+[15:00:58] [INFO   ] HTML de info generado en assets/info.html
+[15:00:58] [INFO   ] Grafo cargado: 78 nodos, 290 aristas
+[15:00:58] [INFO   ] Simulator configurado. Iniciando render...
+[15:00:58] [INFO   ] RendererSFML inicializado - ventana 1280x720
+[15:01:03] [INFO   ] Nueva orden ORD_00001 desde R23
+[15:01:03] [INFO   ] Dealer D01 asignado a ORD_00001
+[15:01:08] [INFO   ] Nueva orden ORD_00002 desde R01
+[15:01:08] [INFO   ] Dealer D02 asignado a ORD_00002
+[15:01:13] [INFO   ] Nueva orden ORD_00003 desde R04
+[15:01:13] [INFO   ] Dealer D03 asignado a ORD_00003
+[15:01:18] [INFO   ] Nueva orden ORD_00004 desde R24
+[15:01:22] [INFO   ] Dealer D01 llego al restaurante, recogiendo ORD_00001
+[15:01:23] [INFO   ] Nueva orden ORD_00005 desde R21
+[15:01:24] [INFO   ] Dealer D01 sale del restaurante entregando ORD_00001
+[15:01:26] [INFO   ] Dealer D02 llego al restaurante, recogiendo ORD_00002
+[15:01:27] [INFO   ] Dealer D02 sale del restaurante entregando ORD_00002
+[15:01:28] [INFO   ] Nueva orden ORD_00006 desde R24
+[15:01:33] [INFO   ] Nueva orden ORD_00007 desde R08
+[15:01:36] [INFO   ] Nueva orden ORD_00008 desde R07
+[15:01:38] [INFO   ] Nueva orden ORD_00009 desde R24
+[15:01:38] [INFO   ] Dealer D02 entrego ORD_00002
+[15:01:38] [INFO   ] Dealer D02 asignado a ORD_00004
+[15:01:39] [INFO   ] Dealer D01 entrego ORD_00001
+[15:01:39] [INFO   ] Dealer D01 asignado a ORD_00006
+[15:01:40] [INFO   ] Nueva orden ORD_00010 desde R18
+[15:01:42] [INFO   ] Nueva orden ORD_00011 desde R13
+[15:01:43] [INFO   ] Dealer D03 llego al restaurante, recogiendo ORD_00003
+[15:01:44] [INFO   ] Nueva orden ORD_00012 desde R20
+[15:01:44] [INFO   ] Dealer D03 sale del restaurante entregando ORD_00003
+[15:01:46] [INFO   ] Nueva orden ORD_00013 desde R06
+[15:01:46] [INFO   ] Dealer D01 llego al restaurante, recogiendo ORD_00006
+[15:01:47] [INFO   ] Dealer D01 sale del restaurante entregando ORD_00006
+[15:01:48] [INFO   ] Dealer D02 llego al restaurante, recogiendo ORD_00004
+[15:01:48] [INFO   ] Nueva orden ORD_00014 desde R02
+[15:01:48] [INFO   ] Dealer D02 sale del restaurante entregando ORD_00004
+[15:01:50] [INFO   ] Nueva orden ORD_00015 desde R20
+[15:01:52] [INFO   ] Nueva orden ORD_00016 desde R13
+[15:01:54] [INFO   ] Nueva orden ORD_00017 desde R06
+[15:01:56] [INFO   ] Nueva orden ORD_00018 desde R18
+[15:01:58] [INFO   ] Nueva orden ORD_00019 desde R01
+[15:01:58] [INFO   ] Dealer D01 entrego ORD_00006
+[15:01:58] [INFO   ] Dealer D01 asignado a ORD_00005
+[15:02:00] [INFO   ] Nueva orden ORD_00020 desde R15
+[15:02:00] [INFO   ] Dealer D02 entrego ORD_00004
+[15:02:00] [INFO   ] Dealer D02 asignado a ORD_00007
+[15:02:02] [INFO   ] Nueva orden ORD_00021 desde R05
+[15:02:02] [INFO   ] Dealer D03 entrego ORD_00003
+[15:02:02] [INFO   ] Dealer D03 asignado a ORD_00010
+[15:02:04] [INFO   ] Nueva orden ORD_00022 desde R17
+[15:02:06] [INFO   ] Nueva orden ORD_00023 desde R07
+[15:02:08] [INFO   ] Nueva orden ORD_00024 desde R14
+[15:02:09] [INFO   ] Dealer D01 llego al restaurante, recogiendo ORD_00005
+[15:02:09] [INFO   ] Dealer D01 sale del restaurante entregando ORD_00005
+[15:02:10] [INFO   ] Nueva orden ORD_00025 desde R11
+[15:02:12] [INFO   ] Nueva orden ORD_00026 desde R15
+[15:02:14] [INFO   ] Nueva orden ORD_00027 desde R03
+[15:02:16] [INFO   ] Nueva orden ORD_00028 desde R13
+[15:02:18] [INFO   ] Nueva orden ORD_00029 desde R08
+[15:02:18] [INFO   ] Dealer D02 llego al restaurante, recogiendo ORD_00007
+[15:02:19] [INFO   ] Dealer D02 sale del restaurante entregando ORD_00007
+[15:02:20] [INFO   ] Nueva orden ORD_00030 desde R22
+[15:02:22] [INFO   ] Nueva orden ORD_00031 desde R16
+[15:02:24] [INFO   ] Nueva orden ORD_00032 desde R03
+[15:02:24] [INFO   ] Dealer D01 entrego ORD_00005
+[15:02:24] [INFO   ] Dealer D01 asignado a ORD_00012
+[15:02:26] [INFO   ] Nueva orden ORD_00033 desde R07
+[15:02:28] [INFO   ] Nueva orden ORD_00034 desde R01
+[15:02:30] [INFO   ] Dealer D03 llego al restaurante, recogiendo ORD_00010
+[15:02:30] [INFO   ] Nueva orden ORD_00035 desde R04
+[15:02:30] [INFO   ] Dealer D03 sale del restaurante entregando ORD_00010
+[15:02:32] [INFO   ] Nueva orden ORD_00036 desde R12
+[15:02:32] [INFO   ] Nueva orden ORD_00037 desde R06
+[15:02:32] [INFO   ] Nueva orden ORD_00038 desde R21
+[15:02:32] [INFO   ] Nueva orden ORD_00039 desde R20
+[15:02:32] [INFO   ] Nueva orden ORD_00040 desde R17
+[15:02:32] [INFO   ] Nueva orden ORD_00041 desde R07
+[15:02:32] [INFO   ] Nueva orden ORD_00042 desde R23
+[15:02:33] [INFO   ] Nueva orden ORD_00043 desde R21
+[15:02:33] [INFO   ] Nueva orden ORD_00044 desde R14
+[15:02:33] [INFO   ] Dealer D02 entrego ORD_00007
+[15:02:33] [INFO   ] Dealer D02 asignado a ORD_00014
+[15:02:34] [INFO   ] Nueva orden ORD_00045 desde R01
+[15:02:34] [INFO   ] Nueva orden ORD_00046 desde R18
+[15:02:34] [INFO   ] Nueva orden ORD_00047 desde R23
+[15:02:35] [INFO   ] Nueva orden ORD_00048 desde R22
+[15:02:35] [INFO   ] Nueva orden ORD_00049 desde R05
+[15:02:36] [INFO   ] Nueva orden ORD_00050 desde R15
+[15:02:36] [INFO   ] Nueva orden ORD_00051 desde R23
+[15:02:37] [INFO   ] Nueva orden ORD_00052 desde R09
+[15:02:37] [INFO   ] Nueva orden ORD_00053 desde R16
+[15:02:37] [INFO   ] Nueva orden ORD_00054 desde R05
+[15:02:38] [INFO   ] Nueva orden ORD_00055 desde R17
+[15:02:38] [INFO   ] Nueva orden ORD_00056 desde R18
+[15:02:39] [INFO   ] Nueva orden ORD_00057 desde R19
+[15:02:39] [INFO   ] Nueva orden ORD_00058 desde R09
+[15:02:39] [INFO   ] Nueva orden ORD_00059 desde R03
+[15:02:40] [INFO   ] Nueva orden ORD_00060 desde R24
+[15:02:40] [INFO   ] Nueva orden ORD_00061 desde R04
+[15:02:40] [INFO   ] Nueva orden ORD_00062 desde R03
+[15:02:41] [INFO   ] Nueva orden ORD_00063 desde R05
+[15:02:41] [INFO   ] Nueva orden ORD_00064 desde R22
+[15:02:42] [INFO   ] Nueva orden ORD_00065 desde R10
+[15:02:42] [INFO   ] Nueva orden ORD_00066 desde R20
+[15:02:42] [INFO   ] Nueva orden ORD_00067 desde R20
+[15:02:43] [INFO   ] Nueva orden ORD_00068 desde R21
+[15:02:43] [INFO   ] Nueva orden ORD_00069 desde R13
+[15:02:44] [INFO   ] Nueva orden ORD_00070 desde R06
+[15:02:44] [INFO   ] Nueva orden ORD_00071 desde R16
+[15:02:44] [INFO   ] Nueva orden ORD_00072 desde R04
+[15:02:45] [INFO   ] Dealer D02 llego al restaurante, recogiendo ORD_00014
+[15:02:45] [INFO   ] Nueva orden ORD_00073 desde R15
+[15:02:45] [INFO   ] Nueva orden ORD_00074 desde R08
+[15:02:45] [INFO   ] Dealer D02 sale del restaurante entregando ORD_00014
+[15:02:46] [INFO   ] Nueva orden ORD_00075 desde R04
+[15:02:46] [INFO   ] Nueva orden ORD_00076 desde R08
+[15:02:47] [INFO   ] Nueva orden ORD_00077 desde R01
+[15:02:47] [INFO   ] Dealer D01 llego al restaurante, recogiendo ORD_00012
+[15:02:47] [INFO   ] Nueva orden ORD_00078 desde R14
+[15:02:47] [INFO   ] Dealer D01 sale del restaurante entregando ORD_00012
+[15:02:47] [INFO   ] Nueva orden ORD_00079 desde R08
+[15:02:48] [INFO   ] Nueva orden ORD_00080 desde R13
+[15:02:48] [INFO   ] Nueva orden ORD_00081 desde R10
+[15:02:49] [INFO   ] Nueva orden ORD_00082 desde R15
+[15:02:49] [INFO   ] Nueva orden ORD_00083 desde R14
+[15:02:49] [INFO   ] Nueva orden ORD_00084 desde R23
+[15:02:50] [INFO   ] Nueva orden ORD_00085 desde R12
+[15:02:50] [INFO   ] Nueva orden ORD_00086 desde R20
+[15:02:51] [INFO   ] Nueva orden ORD_00087 desde R15
+[15:02:51] [INFO   ] Nueva orden ORD_00088 desde R04
+[15:02:51] [INFO   ] Dealer D03 entrego ORD_00010
+[15:02:51] [INFO   ] Dealer D03 asignado a ORD_00016
+[15:02:51] [INFO   ] Nueva orden ORD_00089 desde R25
+[15:02:52] [INFO   ] Nueva orden ORD_00090 desde R17
+[15:02:52] [INFO   ] Nueva orden ORD_00091 desde R24
+[15:02:52] [INFO   ] Nueva orden ORD_00092 desde R20
+[15:02:53] [INFO   ] Nueva orden ORD_00093 desde R01
+[15:02:53] [INFO   ] Nueva orden ORD_00094 desde R01
+[15:02:54] [INFO   ] Nueva orden ORD_00095 desde R04
+[15:02:54] [INFO   ] Nueva orden ORD_00096 desde R03
+[15:02:54] [INFO   ] Nueva orden ORD_00097 desde R11
+[15:02:55] [INFO   ] Nueva orden ORD_00098 desde R01
+[15:02:55] [INFO   ] Nueva orden ORD_00099 desde R12
+[15:02:56] [INFO   ] Nueva orden ORD_00100 desde R12
+[15:02:56] [INFO   ] Nueva orden ORD_00101 desde R05
+[15:02:56] [INFO   ] Nueva orden ORD_00102 desde R03
+[15:02:57] [INFO   ] Nueva orden ORD_00103 desde R17
+[15:02:57] [INFO   ] Nueva orden ORD_00104 desde R17
+[15:02:58] [INFO   ] Nueva orden ORD_00105 desde R24
+[15:02:58] [INFO   ] Nueva orden ORD_00106 desde R10
+[15:02:58] [INFO   ] Nueva orden ORD_00107 desde R10
+[15:02:59] [INFO   ] Nueva orden ORD_00108 desde R25
+[15:02:59] [INFO   ] Nueva orden ORD_00109 desde R18
+[15:03:00] [INFO   ] Nueva orden ORD_00110 desde R07
+[15:03:00] [INFO   ] Nueva orden ORD_00111 desde R11
+[15:03:00] [INFO   ] Nueva orden ORD_00112 desde R03
+[15:03:01] [INFO   ] Nueva orden ORD_00113 desde R24
+[15:03:01] [INFO   ] Nueva orden ORD_00114 desde R03
+[15:03:02] [INFO   ] Nueva orden ORD_00115 desde R22
+[15:03:02] [INFO   ] Nueva orden ORD_00116 desde R11
+[15:03:03] [INFO   ] Nueva orden ORD_00117 desde R18
+[15:03:03] [INFO   ] Nueva orden ORD_00118 desde R06
+[15:03:03] [INFO   ] Nueva orden ORD_00119 desde R01
+[15:03:04] [INFO   ] Nueva orden ORD_00120 desde R06
+[15:03:04] [INFO   ] Nueva orden ORD_00121 desde R17
+[15:03:04] [INFO   ] Nueva orden ORD_00122 desde R07
+[15:03:05] [INFO   ] Nueva orden ORD_00123 desde R19
+[15:03:05] [INFO   ] Nueva orden ORD_00124 desde R19
+[15:03:06] [INFO   ] Nueva orden ORD_00125 desde R06
+[15:03:06] [INFO   ] Nueva orden ORD_00126 desde R25
+[15:03:07] [INFO   ] Nueva orden ORD_00127 desde R10
+[15:03:07] [INFO   ] Nueva orden ORD_00128 desde R12
+[15:03:07] [INFO   ] Nueva orden ORD_00129 desde R07
+[15:03:08] [INFO   ] Nueva orden ORD_00130 desde R15
+[15:03:08] [INFO   ] Nueva orden ORD_00131 desde R10
+[15:03:09] [INFO   ] Nueva orden ORD_00132 desde R04
+[15:03:09] [INFO   ] Nueva orden ORD_00133 desde R24
+[15:03:10] [INFO   ] Nueva orden ORD_00134 desde R02
+[15:03:10] [INFO   ] Nueva orden ORD_00135 desde R07
+[15:03:11] [INFO   ] Nueva orden ORD_00136 desde R02
+[15:03:11] [INFO   ] Nueva orden ORD_00137 desde R24
+[15:03:12] [INFO   ] Nueva orden ORD_00138 desde R11
+[15:03:12] [INFO   ] Nueva orden ORD_00139 desde R16
+[15:03:13] [INFO   ] Nueva orden ORD_00140 desde R01
+[15:03:13] [INFO   ] Nueva orden ORD_00141 desde R23
+[15:03:14] [INFO   ] Nueva orden ORD_00142 desde R10
+[15:03:14] [INFO   ] Nueva orden ORD_00143 desde R17
+[15:03:15] [INFO   ] Nueva orden ORD_00144 desde R11
+[15:03:15] [INFO   ] Nueva orden ORD_00145 desde R21
+[15:03:16] [INFO   ] Nueva orden ORD_00146 desde R14
+[15:03:16] [INFO   ] Nueva orden ORD_00147 desde R25
+[15:03:17] [INFO   ] Nueva orden ORD_00148 desde R04
+[15:03:17] [INFO   ] Nueva orden ORD_00149 desde R24
+[15:03:17] [INFO   ] Dealer D02 entrego ORD_00014
+[15:03:17] [INFO   ] Dealer D02 asignado a ORD_00018
+[15:03:18] [INFO   ] Nueva orden ORD_00150 desde R18
+[15:03:18] [INFO   ] Nueva orden ORD_00151 desde R10
+[15:03:19] [INFO   ] Nueva orden ORD_00152 desde R24
+[15:03:19] [INFO   ] Nueva orden ORD_00153 desde R05
+[15:03:20] [INFO   ] Nueva orden ORD_00154 desde R18
+[15:03:20] [INFO   ] Dealer D01 entrego ORD_00012
+[15:03:20] [INFO   ] Dealer D01 asignado a ORD_00019
+[15:03:20] [INFO   ] Nueva orden ORD_00155 desde R02
+[15:03:21] [INFO   ] Nueva orden ORD_00156 desde R14
+[15:03:21] [INFO   ] Nueva orden ORD_00157 desde R20
+[15:03:21] [INFO   ] Dealer D03 llego al restaurante, recogiendo ORD_00016
+[15:03:22] [INFO   ] Nueva orden ORD_00158 desde R06
+[15:03:22] [INFO   ] Dealer D03 sale del restaurante entregando ORD_00016
+[15:03:22] [INFO   ] Nueva orden ORD_00159 desde R13
+[15:03:23] [INFO   ] Nueva orden ORD_00160 desde R20
+[15:03:23] [INFO   ] Nueva orden ORD_00161 desde R02
+[15:03:24] [INFO   ] Nueva orden ORD_00162 desde R19
+[15:03:24] [INFO   ] Nueva orden ORD_00163 desde R14
+[15:03:25] [INFO   ] Nueva orden ORD_00164 desde R08
+[15:03:25] [INFO   ] Nueva orden ORD_00165 desde R02
+[15:03:26] [INFO   ] Nueva orden ORD_00166 desde R09
+[15:03:26] [INFO   ] Nueva orden ORD_00167 desde R24
+[15:03:27] [INFO   ] Nueva orden ORD_00168 desde R11
+[15:03:27] [INFO   ] Nueva orden ORD_00169 desde R07
+[15:03:28] [INFO   ] Nueva orden ORD_00170 desde R16
+[15:03:28] [INFO   ] Nueva orden ORD_00171 desde R25
+[15:03:29] [INFO   ] Nueva orden ORD_00172 desde R16
+[15:03:29] [INFO   ] Nueva orden ORD_00173 desde R02
+[15:03:30] [INFO   ] Nueva orden ORD_00174 desde R12
+[15:03:30] [INFO   ] Nueva orden ORD_00175 desde R02
+[15:03:31] [INFO   ] Nueva orden ORD_00176 desde R23
+[15:03:31] [INFO   ] Nueva orden ORD_00177 desde R15
+[15:03:32] [INFO   ] Nueva orden ORD_00178 desde R07
+[15:03:32] [INFO   ] Nueva orden ORD_00179 desde R13
+[15:03:32] [INFO   ] Dealer D03 entrego ORD_00016
+[15:03:32] [INFO   ] Dealer D03 asignado a ORD_00009
+[15:03:33] [INFO   ] Nueva orden ORD_00180 desde R11
+[15:03:33] [INFO   ] Nueva orden ORD_00181 desde R23
+[15:03:33] [INFO   ] Nueva orden ORD_00182 desde R25
+[15:03:34] [INFO   ] Nueva orden ORD_00183 desde R02
+[15:03:34] [INFO   ] Nueva orden ORD_00184 desde R06
+[15:03:34] [INFO   ] Nueva orden ORD_00185 desde R13
+[15:03:35] [INFO   ] Nueva orden ORD_00186 desde R07
+[15:03:35] [INFO   ] Nueva orden ORD_00187 desde R14
+[15:03:36] [INFO   ] Nueva orden ORD_00188 desde R07
+[15:03:36] [INFO   ] Nueva orden ORD_00189 desde R06
+[15:03:37] [INFO   ] Nueva orden ORD_00190 desde R23
+[15:03:37] [INFO   ] Nueva orden ORD_00191 desde R22
+[15:03:37] [INFO   ] Nueva orden ORD_00192 desde R23
+[15:03:38] [INFO   ] Nueva orden ORD_00193 desde R14
+[15:03:38] [INFO   ] Nueva orden ORD_00194 desde R12
+[15:03:39] [INFO   ] Nueva orden ORD_00195 desde R10
+[15:03:39] [INFO   ] Nueva orden ORD_00196 desde R01
+[15:03:39] [INFO   ] Nueva orden ORD_00197 desde R20
+[15:03:40] [INFO   ] Nueva orden ORD_00198 desde R04
+[15:03:40] [INFO   ] Nueva orden ORD_00199 desde R09
+[15:03:40] [INFO   ] Nueva orden ORD_00200 desde R22
+[15:03:41] [INFO   ] Nueva orden ORD_00201 desde R18
+[15:03:41] [INFO   ] Nueva orden ORD_00202 desde R18
+[15:03:42] [INFO   ] Nueva orden ORD_00203 desde R21
+[15:03:42] [INFO   ] Nueva orden ORD_00204 desde R24
+[15:03:43] [INFO   ] Nueva orden ORD_00205 desde R13
+[15:03:43] [INFO   ] Nueva orden ORD_00206 desde R12
+[15:03:43] [INFO   ] Dealer D01 llego al restaurante, recogiendo ORD_00019
+[15:03:43] [INFO   ] Nueva orden ORD_00207 desde R07
+[15:03:44] [INFO   ] Dealer D01 sale del restaurante entregando ORD_00019
+[15:03:44] [INFO   ] Nueva orden ORD_00208 desde R22
+[15:03:44] [INFO   ] Nueva orden ORD_00209 desde R24
+[15:03:44] [INFO   ] Nueva orden ORD_00210 desde R03
+[15:03:44] [INFO   ] Nueva orden ORD_00211 desde R17
+[15:03:44] [INFO   ] Nueva orden ORD_00212 desde R19
+[15:03:45] [INFO   ] Nueva orden ORD_00213 desde R25
+[15:03:45] [INFO   ] Nueva orden ORD_00214 desde R20
+[15:03:45] [INFO   ] Nueva orden ORD_00215 desde R07
+[15:03:45] [INFO   ] Nueva orden ORD_00216 desde R06
+[15:03:45] [INFO   ] Nueva orden ORD_00217 desde R16
+[15:03:45] [INFO   ] Nueva orden ORD_00218 desde R05
+[15:03:46] [INFO   ] Nueva orden ORD_00219 desde R13
+[15:03:46] [INFO   ] Nueva orden ORD_00220 desde R07
+[15:03:46] [INFO   ] Dealer D02 llego al restaurante, recogiendo ORD_00018
+[15:03:46] [INFO   ] Nueva orden ORD_00221 desde R06
+[15:03:46] [INFO   ] Nueva orden ORD_00222 desde R08
+[15:03:46] [INFO   ] Nueva orden ORD_00223 desde R03
+[15:03:47] [INFO   ] Dealer D02 sale del restaurante entregando ORD_00018
+[15:03:47] [INFO   ] Nueva orden ORD_00224 desde R05
+[15:03:47] [INFO   ] Nueva orden ORD_00225 desde R24
+[15:03:47] [INFO   ] Nueva orden ORD_00226 desde R02
+[15:03:47] [INFO   ] Nueva orden ORD_00227 desde R16
+[15:03:48] [INFO   ] Nueva orden ORD_00228 desde R03
+[15:03:48] [INFO   ] Nueva orden ORD_00229 desde R03
+[15:03:48] [INFO   ] Nueva orden ORD_00230 desde R24
+[15:03:48] [INFO   ] Nueva orden ORD_00231 desde R02
+[15:03:48] [INFO   ] Nueva orden ORD_00232 desde R22
+[15:03:49] [INFO   ] Nueva orden ORD_00233 desde R03
+[15:03:49] [INFO   ] Nueva orden ORD_00234 desde R18
+[15:03:49] [INFO   ] Nueva orden ORD_00235 desde R01
+[15:03:49] [INFO   ] Nueva orden ORD_00236 desde R22
+[15:03:49] [INFO   ] Nueva orden ORD_00237 desde R22
+[15:03:50] [INFO   ] Nueva orden ORD_00238 desde R03
+[15:03:50] [INFO   ] Nueva orden ORD_00239 desde R22
+[15:03:50] [INFO   ] Nueva orden ORD_00240 desde R22
+[15:03:50] [INFO   ] Nueva orden ORD_00241 desde R22
+[15:03:50] [INFO   ] Dealer D03 llego al restaurante, recogiendo ORD_00009
+[15:03:50] [INFO   ] Nueva orden ORD_00242 desde R07
+[15:03:50] [INFO   ] Nueva orden ORD_00243 desde R06
+[15:03:51] [INFO   ] Nueva orden ORD_00244 desde R23
+[15:03:51] [INFO   ] Dealer D03 sale del restaurante entregando ORD_00009
+[15:03:51] [INFO   ] Nueva orden ORD_00245 desde R13
+[15:03:51] [INFO   ] Nueva orden ORD_00246 desde R09
+[15:03:51] [INFO   ] Nueva orden ORD_00247 desde R05
+[15:03:51] [INFO   ] Nueva orden ORD_00248 desde R09
+[15:03:52] [INFO   ] Nueva orden ORD_00249 desde R16
+[15:03:52] [INFO   ] Dealer D01 entrego ORD_00019
+[15:03:52] [INFO   ] Nueva orden ORD_00250 desde R23
+[15:03:52] [INFO   ] Dealer D01 asignado a ORD_00021
+[15:03:52] [INFO   ] Nueva orden ORD_00251 desde R15
+[15:03:52] [INFO   ] Nueva orden ORD_00252 desde R20
+[15:03:52] [INFO   ] Nueva orden ORD_00253 desde R06
+[15:03:53] [INFO   ] Nueva orden ORD_00254 desde R14
+[15:03:53] [INFO   ] Nueva orden ORD_00255 desde R18
+[15:03:53] [INFO   ] Nueva orden ORD_00256 desde R01
+[15:03:53] [INFO   ] Nueva orden ORD_00257 desde R03
+[15:03:54] [INFO   ] Nueva orden ORD_00258 desde R05
+[15:03:54] [INFO   ] Nueva orden ORD_00259 desde R09
+[15:03:54] [INFO   ] Nueva orden ORD_00260 desde R14
+[15:03:54] [INFO   ] Nueva orden ORD_00261 desde R22
+[15:03:54] [INFO   ] Nueva orden ORD_00262 desde R21
+[15:03:55] [INFO   ] Nueva orden ORD_00263 desde R25
+[15:03:55] [INFO   ] Nueva orden ORD_00264 desde R20
+[15:03:55] [INFO   ] Nueva orden ORD_00265 desde R14
+[15:03:55] [INFO   ] Nueva orden ORD_00266 desde R24
+[15:03:55] [INFO   ] Nueva orden ORD_00267 desde R15
+[15:03:55] [INFO   ] Nueva orden ORD_00268 desde R09
+[15:03:56] [INFO   ] Nueva orden ORD_00269 desde R18
+[15:03:56] [INFO   ] Nueva orden ORD_00270 desde R04
+[15:03:56] [INFO   ] Nueva orden ORD_00271 desde R09
+[15:03:56] [INFO   ] Nueva orden ORD_00272 desde R18
+[15:03:56] [INFO   ] Nueva orden ORD_00273 desde R08
+[15:03:57] [INFO   ] Nueva orden ORD_00274 desde R18
+[15:03:57] [INFO   ] Nueva orden ORD_00275 desde R06
+[15:03:57] [INFO   ] Nueva orden ORD_00276 desde R11
+[15:03:57] [INFO   ] Nueva orden ORD_00277 desde R07
+[15:03:58] [INFO   ] Nueva orden ORD_00278 desde R12
+[15:03:58] [INFO   ] Nueva orden ORD_00279 desde R10
+[15:03:58] [INFO   ] Nueva orden ORD_00280 desde R13
+[15:03:58] [INFO   ] Nueva orden ORD_00281 desde R19
+[15:03:58] [INFO   ] Nueva orden ORD_00282 desde R25
+[15:03:59] [INFO   ] Nueva orden ORD_00283 desde R16
+[15:03:59] [INFO   ] Nueva orden ORD_00284 desde R06
+[15:03:59] [INFO   ] Nueva orden ORD_00285 desde R14
+[15:03:59] [INFO   ] Nueva orden ORD_00286 desde R10
+[15:03:59] [INFO   ] Nueva orden ORD_00287 desde R22
+[15:03:59] [INFO   ] Nueva orden ORD_00288 desde R06
+[15:04:00] [INFO   ] Nueva orden ORD_00289 desde R18
+[15:04:00] [INFO   ] Nueva orden ORD_00290 desde R12
+[15:04:00] [INFO   ] Nueva orden ORD_00291 desde R17
+[15:04:00] [INFO   ] Nueva orden ORD_00292 desde R13
+[15:04:00] [INFO   ] Nueva orden ORD_00293 desde R02
+[15:04:01] [INFO   ] Nueva orden ORD_00294 desde R05
+[15:04:01] [INFO   ] Nueva orden ORD_00295 desde R25
+[15:04:01] [INFO   ] Nueva orden ORD_00296 desde R04
+[15:04:01] [INFO   ] Nueva orden ORD_00297 desde R22
+[15:04:01] [INFO   ] Nueva orden ORD_00298 desde R10
+[15:04:02] [INFO   ] Nueva orden ORD_00299 desde R01
+[15:04:02] [INFO   ] Nueva orden ORD_00300 desde R24
+[15:04:02] [INFO   ] Nueva orden ORD_00301 desde R20
+[15:04:02] [INFO   ] Nueva orden ORD_00302 desde R17
+[15:04:02] [INFO   ] Nueva orden ORD_00303 desde R09
+[15:04:03] [INFO   ] Nueva orden ORD_00304 desde R11
+[15:04:03] [INFO   ] Nueva orden ORD_00305 desde R24
+[15:04:08] [INFO   ] Nueva orden ORD_00306 desde R18
+[15:04:08] [INFO   ] Nueva orden ORD_00307 desde R15
+[15:04:08] [INFO   ] Nueva orden ORD_00308 desde R03
+[15:04:08] [INFO   ] Nueva orden ORD_00309 desde R25
+[15:04:09] [INFO   ] Nueva orden ORD_00310 desde R07
+[15:04:09] [INFO   ] Nueva orden ORD_00311 desde R06
+[15:04:09] [INFO   ] Nueva orden ORD_00312 desde R13
+[15:04:24] [INFO   ] Nueva orden ORD_00313 desde R23
+[15:04:26] [INFO   ] Nueva orden ORD_00314 desde R07
+[15:04:26] [INFO   ] Nueva orden ORD_00315 desde R12
+[15:04:26] [INFO   ] Dealer D01 llego al restaurante, recogiendo ORD_00021
+[15:04:26] [INFO   ] Nueva orden ORD_00316 desde R03
+[15:04:26] [INFO   ] Nueva orden ORD_00317 desde R21
+[15:04:26] [INFO   ] Nueva orden ORD_00318 desde R23
+[15:04:26] [INFO   ] Dealer D01 sale del restaurante entregando ORD_00021
+[15:04:27] [INFO   ] Nueva orden ORD_00319 desde R17
+[15:04:27] [INFO   ] Nueva orden ORD_00320 desde R03
+[15:04:27] [INFO   ] Nueva orden ORD_00321 desde R19
+[15:04:27] [INFO   ] Nueva orden ORD_00322 desde R15
+[15:04:27] [INFO   ] Nueva orden ORD_00323 desde R20
+[15:04:28] [INFO   ] Nueva orden ORD_00324 desde R18
+[15:04:28] [INFO   ] Nueva orden ORD_00325 desde R01
+[15:04:28] [INFO   ] Nueva orden ORD_00326 desde R03
+[15:04:29] [INFO   ] Nueva orden ORD_00327 desde R04
+[15:04:30] [INFO   ] Nueva orden ORD_00328 desde R04
+[15:04:30] [INFO   ] Nueva orden ORD_00329 desde R19
+[15:04:31] [INFO   ] Nueva orden ORD_00330 desde R10
+[15:04:31] [INFO   ] Nueva orden ORD_00331 desde R19
+[15:04:32] [INFO   ] Dealer D02 entrego ORD_00018
+[15:04:32] [INFO   ] Dealer D02 asignado a ORD_00023
+[15:04:32] [INFO   ] Nueva orden ORD_00332 desde R24
+[15:04:32] [INFO   ] Nueva orden ORD_00333 desde R04
+[15:04:33] [INFO   ] Nueva orden ORD_00334 desde R18
+[15:04:33] [INFO   ] Dealer D03 entrego ORD_00009
+[15:04:33] [INFO   ] Dealer D03 asignado a ORD_00025
+[15:04:34] [INFO   ] Nueva orden ORD_00335 desde R10
+[15:04:34] [INFO   ] Nueva orden ORD_00336 desde R08
+[15:04:35] [INFO   ] Nueva orden ORD_00337 desde R25
+[15:04:35] [INFO   ] Nueva orden ORD_00338 desde R23
+[15:04:36] [INFO   ] Nueva orden ORD_00339 desde R11
+[15:04:36] [INFO   ] Nueva orden ORD_00340 desde R08
+[15:04:37] [INFO   ] Nueva orden ORD_00341 desde R22
+[15:04:38] [INFO   ] Nueva orden ORD_00342 desde R05
+[15:04:38] [INFO   ] Nueva orden ORD_00343 desde R17
+[15:04:39] [INFO   ] Nueva orden ORD_00344 desde R17
+[15:04:39] [INFO   ] Nueva orden ORD_00345 desde R17
+[15:04:40] [INFO   ] Nueva orden ORD_00346 desde R09
+[15:04:40] [INFO   ] Nueva orden ORD_00347 desde R14
+[15:04:41] [INFO   ] Nueva orden ORD_00348 desde R12
+[15:04:42] [INFO   ] Nueva orden ORD_00349 desde R06
+[15:04:42] [INFO   ] Nueva orden ORD_00350 desde R19
+[15:04:43] [INFO   ] Nueva orden ORD_00351 desde R05
+[15:04:43] [INFO   ] Nueva orden ORD_00352 desde R16
+[15:04:44] [INFO   ] Nueva orden ORD_00353 desde R12
+[15:04:44] [INFO   ] Nueva orden ORD_00354 desde R12
+[15:04:45] [INFO   ] Nueva orden ORD_00355 desde R11
+[15:04:46] [INFO   ] Nueva orden ORD_00356 desde R22
+[15:04:46] [INFO   ] Nueva orden ORD_00357 desde R18
+[15:04:47] [INFO   ] Nueva orden ORD_00358 desde R16
+[15:04:47] [INFO   ] Nueva orden ORD_00359 desde R04
+[15:04:48] [INFO   ] Nueva orden ORD_00360 desde R23
+[15:04:48] [INFO   ] Nueva orden ORD_00361 desde R12
+[15:04:49] [INFO   ] Nueva orden ORD_00362 desde R25
+[15:04:50] [INFO   ] Nueva orden ORD_00363 desde R06
+[15:04:50] [INFO   ] Nueva orden ORD_00364 desde R06
+[15:04:50] [INFO   ] Dealer D03 llego al restaurante, recogiendo ORD_00025
+[15:04:51] [INFO   ] Nueva orden ORD_00365 desde R18
+[15:04:51] [INFO   ] Dealer D03 sale del restaurante entregando ORD_00025
+[15:04:51] [INFO   ] Nueva orden ORD_00366 desde R20
+[15:04:52] [INFO   ] Nueva orden ORD_00367 desde R23
+[15:04:52] [INFO   ] Nueva orden ORD_00368 desde R21
+[15:04:53] [INFO   ] Nueva orden ORD_00369 desde R17
+[15:04:54] [INFO   ] Nueva orden ORD_00370 desde R25
+[15:04:54] [INFO   ] Nueva orden ORD_00371 desde R19
+[15:04:54] [INFO   ] VousCommandez cerrado.

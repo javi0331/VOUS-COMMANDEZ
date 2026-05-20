@@ -407,7 +407,9 @@ void RendererSFML::drawDealer(
     dealerShape.setOrigin({r, r});
     dealerShape.setPosition(pos);
 
-    const auto& dealer = simulator.getDealers().at(dealerId);
+    auto dealerIt = simulator.getDealers().find(dealerId);
+    if (dealerIt == simulator.getDealers().end()) return;
+    const auto& dealer = dealerIt->second;
 
     sf::Color fill;
     switch (dealer.getStatus()) {

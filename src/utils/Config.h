@@ -1,25 +1,27 @@
 #pragma once
 
 // ═══════════════════════════════════════════════════════════════
-//  CONFIG — fuente única de verdad para todos los parámetros
-//  Toda constante numérica del proyecto debe vivir aquí.
-//  Simulación, tráfico, estrucAturas, visual y UI dependen de esto.
+//  CONFIG — fuente unica de verdad para todos los parametros
+//  Toda constante numerica del proyecto debe vivir aqui.
+//  Simulacion, trafico, estructuras, visual y UI dependen de esto.
 // ═══════════════════════════════════════════════════════════════
 
 class Config {
 public:
     Config() = delete;
 
-    // ── Simulación ────────────────────────────────────────────
-    // min simulados / seg real — ajustados para que el proceso
-    // sea observable: Lenta≈2x, Normal≈5x, Rápida≈20x
-    static constexpr double SIM_SPEED_DEFAULT   = 5.0;
-    static constexpr double SIM_SPEED_FAST      = 20.0;
-    static constexpr double SIM_SPEED_SLOW      = 2.0;
+    // ── Simulacion ────────────────────────────────────────────
+    // min simulados / seg real
+    //   Lenta  = 0.75x (casi tiempo real, muy observable)
+    //   Normal = 2x    (por defecto)
+    //   Rapida = 5x    (acelerado)
+    static constexpr double SIM_SPEED_DEFAULT   = 2.0;
+    static constexpr double SIM_SPEED_FAST      = 5.0;
+    static constexpr double SIM_SPEED_SLOW      = 0.75;
 
     static constexpr int    SIM_START_HOUR      = 8;
 
-    // ── Tráfico — multiplicadores de peso ─────────────────────
+    // ── Trafico — multiplicadores de peso ─────────────────────
     static constexpr double WEATHER_CLEAR       = 1.0;
     static constexpr double WEATHER_RAIN        = 1.3;
     static constexpr double WEATHER_STORM       = 1.6;
@@ -39,7 +41,11 @@ public:
     static constexpr double DEALER_SCORE_ALPHA  = 0.6;
     static constexpr double DEALER_SCORE_BETA   = 0.4;
 
-    // ── Órdenes ───────────────────────────────────────────────
+    // Tiempo que el dealer espera en el restaurante recogiendo
+    // (en minutos simulados). Visible en pantalla como PICKING_UP.
+    static constexpr double DEALER_PICKUP_TIME  = 3.0;
+
+    // ── Ordenes ───────────────────────────────────────────────
     static constexpr int    ORDER_MAX_ACTIVE    = 200;
     static constexpr int    ORDER_PRIORITY_MIN  = 1;
     static constexpr int    ORDER_PRIORITY_MAX  = 5;
@@ -47,7 +53,7 @@ public:
     static constexpr int    ORDER_BOOST_AMOUNT  = 2;
     static constexpr double ORDER_BOOST_INTERVAL= 5.0;
 
-    // ── Generador de órdenes ──────────────────────────────────
+    // ── Generador de ordenes ──────────────────────────────────
     static constexpr double SPAWN_RATE_BASE     = 0.5;
     static constexpr double DEMAND_DAWN         = 0.2;
     static constexpr double DEMAND_MORNING      = 0.8;
@@ -74,16 +80,16 @@ public:
     static constexpr float  CAMERA_ZOOM_DEFAULT = 1.0f;
     static constexpr float  CAMERA_PAN_SPEED    = 300.0f;
 
-    // ── Nodos en pantalla — más grandes para mejor visibilidad ─
-    static constexpr float  NODE_RADIUS_BARRIO  = 8.0f;   // era 6
-    static constexpr float  NODE_RADIUS_REST    = 7.0f;   // era 5
-    static constexpr float  EDGE_THICKNESS      = 1.5f;   // era 1
-    static constexpr float  ROUTE_THICKNESS     = 3.5f;   // era 3
-    static constexpr float  DEALER_ICON_SIZE    = 13.0f;  // era 10
+    // ── Nodos en pantalla ─────────────────────────────────────
+    static constexpr float  NODE_RADIUS_BARRIO  = 8.0f;
+    static constexpr float  NODE_RADIUS_REST    = 7.0f;
+    static constexpr float  EDGE_THICKNESS      = 1.5f;
+    static constexpr float  ROUTE_THICKNESS     = 3.5f;
+    static constexpr float  DEALER_ICON_SIZE    = 13.0f;
 
     // ── UI ────────────────────────────────────────────────────
     static constexpr float  UI_PANEL_WIDTH      = 280.0f;
-    static constexpr float  UI_HUD_HEIGHT       = 28.0f;  // nuevo — usado por Camera y UI
+    static constexpr float  UI_HUD_HEIGHT       = 28.0f;
     static constexpr float  UI_FONT_SIZE_SMALL  = 12.0f;
     static constexpr float  UI_FONT_SIZE_NORMAL = 14.0f;
     static constexpr float  UI_FONT_SIZE_TITLE  = 18.0f;

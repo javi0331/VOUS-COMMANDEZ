@@ -8,7 +8,7 @@
 
 Simulator::Simulator(const Graph& graph)
     : graph(graph),
-      timeSystem(Config::SIM_SPEED_DEFAULT),  // antes hardcodeado 60.0 — causaba x60 al arranque
+      timeSystem(Config::SIM_SPEED_DEFAULT),
       trafficSystem(timeSystem, weatherSystem),
       eventSystem(trafficSystem, weatherSystem),
       orderGenerator(timeSystem),
@@ -19,7 +19,6 @@ Simulator::Simulator(const Graph& graph)
 
 void Simulator::addDealer(const Dealer& dealer) {
     dealers[dealer.getId()] = dealer;
-    // No se inserta en el heap todavía — se hace en start()
 }
 
 void Simulator::addRestaurant(const Restaurant& restaurant) {
@@ -31,7 +30,7 @@ void Simulator::addRestaurant(const Restaurant& restaurant) {
     orderGenerator.addRestaurant(
         restaurant.getId(),
         restaurant.getNodeId(),
-        1.0   // Peso inicial igual para todos; se actualiza con la sim
+        1.0
     );
 }
 
@@ -44,8 +43,6 @@ void Simulator::addClient(const Client& client) {
 
 void Simulator::start() {
     running = true;
-
-    // Insertar todos los dealers disponibles en el heap con score 0
     for (const auto& [id, dealer] : dealers) {
         if (dealer.isAvailable()) {
             heapDealers.push(id, 0.0);
@@ -69,6 +66,7 @@ void Simulator::reset() {
     trafficSystem.clearEvent();
     eventSystem.clearAll();
     orders.clear();
+    dealerPhases.clear();
     while (!heapDealers.isEmpty()) heapDealers.pop();
     deliveryHistory.clear();
     stats = SimStats{};
@@ -80,29 +78,19 @@ void Simulator::reset() {
 void Simulator::tick(double realDeltaSeconds) {
     if (!running) return;
 
-    // 1. Avanzar tiempo
     timeSystem.update(realDeltaSeconds);
     double simDelta = realDeltaSeconds * timeSystem.getSimulationSpeed();
 
-    // 2. Avanzar sistemas
     weatherSystem.update(simDelta);
     trafficSystem.update(simDelta);
     eventSystem.update(timeSystem.getSimulatedTime());
 
-    // 3. Generar nuevas órdenes
     orderGenerator.update(simDelta);
     processNewOrders();
 
-    // 4. Asignar órdenes a dealers
     assignOrders();
-
-    // 5. Avanzar dealers en tránsito
     updateDealers(simDelta);
-
-    // 6. Boost de órdenes viejas
     boostStaleOrders(simDelta);
-
-    // 7. Actualizar stats para la UI
     updateStats();
 }
 
@@ -119,7 +107,6 @@ void Simulator::processNewOrders() {
             order.getCreatedAt()
         );
 
-        // Notificar al restaurante
         auto it = restaurants.find(order.getRestaurantId());
         if (it != restaurants.end()) {
             it->second.orderReceived();
@@ -130,13 +117,14 @@ void Simulator::processNewOrders() {
         }
 
         stats.totalOrdersGenerated++;
-        Logger::info("Nueva orden " + order.getId() + " desde " + order.getRestaurantId());
+        Logger::info("Nueva orden " + order.getId()
+                     + " desde " + order.getRestaurantId());
     }
 }
 
 void Simulator::assignOrders() {
     while (!pendingOrders.isEmpty() && !heapDealers.isEmpty()) {
-        // Tomar la orden más prioritaria
+
         OrderEntry oe = pendingOrders.pop();
 
         auto orderIt = orders.find(oe.orderId);
@@ -145,15 +133,40 @@ void Simulator::assignOrders() {
         Order& order = orderIt->second;
         if (!order.isPending()) continue;
 
+        // Buscar el nodo del restaurante con guard
+        auto restIt = restaurants.find(order.getRestaurantId());
+        if (restIt == restaurants.end()) {
+            Logger::warn("assignOrders: restaurante no encontrado "
+                         + order.getRestaurantId());
+            order.setStatus(OrderStatus::CANCELLED);
+            stats.totalCancelled++;
+            continue;
+        }
+
+        const std::string& restNodeId = restIt->second.getNodeId();
+
+        // Verificar que el nodo existe en el grafo
+        if (!graph.hasNode(restNodeId)) {
+            Logger::warn("assignOrders: nodo restaurante no en grafo "
+                         + restNodeId);
+            order.setStatus(OrderStatus::CANCELLED);
+            stats.totalCancelled++;
+            continue;
+        }
+
+        if (!graph.hasNode(order.getClientNodeId())) {
+            Logger::warn("assignOrders: nodo cliente no en grafo "
+                         + order.getClientNodeId());
+            order.setStatus(OrderStatus::CANCELLED);
+            stats.totalCancelled++;
+            continue;
+        }
+
         // Reconstruir heap con scores frescos para este restaurante
-        rebuildDealerHeap(
-            restaurants.count(order.getRestaurantId())
-            ? restaurants.at(order.getRestaurantId()).getNodeId()
-            : ""
-        );
+        rebuildDealerHeap(restNodeId);
 
         if (heapDealers.isEmpty()) {
-            // Devolver orden al heap — no hay dealers
+            // Devolver orden — no hay dealers disponibles ahora
             pendingOrders.push(
                 order.getId(),
                 order.getPriority(),
@@ -168,7 +181,6 @@ void Simulator::assignOrders() {
 
         Dealer& dealer = dealerIt->second;
 
-        // Asignar
         order.setDealerId(dealer.getId());
         order.setStatus(OrderStatus::ASSIGNED);
         order.setAssignedAt(timeSystem.getSimulatedTime());
@@ -176,95 +188,192 @@ void Simulator::assignOrders() {
         dealer.assignOrder(order.getId());
         dealer.setStatus(DealerStatus::HEADING_TO_RESTAURANT);
 
-        // Calcular ruta con Dijkstra
         TrafficEdgeData traffic = trafficSystem.getCurrentTraffic();
-        RouteResult route = Dijkstra::compute(
+
+        // Tramo 1: dealer → restaurante
+        RouteResult leg1;
+        if (graph.hasNode(dealer.getCurrentNodeId())) {
+            leg1 = Dijkstra::compute(
+                graph,
+                dealer.getCurrentNodeId(),
+                restNodeId,
+                traffic
+            );
+        }
+
+        // Tramo 2: restaurante → cliente
+        RouteResult leg2 = Dijkstra::compute(
             graph,
-            dealer.getCurrentNodeId(),
-            restaurants.at(order.getRestaurantId()).getNodeId(),
+            restNodeId,
+            order.getClientNodeId(),
             traffic
         );
 
-        if (route.success) {
-            order.setEstimatedTime(route.path.estimatedTime);
-            order.setTotalDistance(route.path.totalDistance);
+        double totalTime = Config::DEALER_PICKUP_TIME;
+        double totalDist = 0.0;
+
+        if (leg1.success) {
+            totalTime += leg1.path.estimatedTime;
+            totalDist += leg1.path.totalDistance;
         }
+        if (leg2.success) {
+            totalTime += leg2.path.estimatedTime;
+            totalDist += leg2.path.totalDistance;
+        }
+
+        order.setEstimatedTime(totalTime);
+        order.setTotalDistance(totalDist);
+
+        // Inicializar fase del dealer
+        DealerPhaseState phase;
+        phase.orderId    = order.getId();
+        phase.phase      = DeliveryPhase::HEADING_TO_RESTAURANT;
+        phase.phaseTimer = leg1.success ? leg1.path.estimatedTime
+                                        : Config::DEALER_PICKUP_TIME;
+        dealerPhases[dealer.getId()] = phase;
+
+        Logger::info("Dealer " + dealer.getId()
+                     + " asignado a " + order.getId());
 
         // Si el dealer aún tiene capacidad, vuelve al heap
         if (!dealer.isFull()) {
-            double score = computeDealerScore(
-                dealer,
-                restaurants.count(order.getRestaurantId())
-                ? restaurants.at(order.getRestaurantId()).getNodeId()
-                : ""
-            );
+            double score = computeDealerScore(dealer, restNodeId);
             heapDealers.push(dealer.getId(), score);
         }
     }
 }
 
+// ── Maquina de estados: HEADING → PICKING_UP → DELIVERING ────
+
 void Simulator::updateDealers(double simDeltaMinutes) {
     TrafficEdgeData traffic = trafficSystem.getCurrentTraffic();
 
     for (auto& [id, dealer] : dealers) {
+
         if (dealer.getStatus() == DealerStatus::IDLE) continue;
+
         if (dealer.getActiveOrderIds().empty()) {
             dealer.setStatus(DealerStatus::IDLE);
-            if (!heapDealers.contains(dealer.getId())) {
-                heapDealers.push(dealer.getId(), 0.0);
-            }
+            dealerPhases.erase(id);
+            if (!heapDealers.contains(id))
+                heapDealers.push(id, 0.0);
             continue;
         }
 
-        // Avanzar la primera orden activa del dealer
-        const std::string& orderId = dealer.getActiveOrderIds().front();
-        auto orderIt = orders.find(orderId);
+        auto phaseIt = dealerPhases.find(id);
+        if (phaseIt == dealerPhases.end()) continue;
+
+        DealerPhaseState& ps = phaseIt->second;
+
+        auto orderIt = orders.find(ps.orderId);
         if (orderIt == orders.end()) continue;
 
         Order& order = orderIt->second;
-        double remaining = order.getEstimatedTime() - simDeltaMinutes;
 
-        if (remaining <= 0.0) {
-            // Entrega completada
-            order.setStatus(OrderStatus::DELIVERED);
-            order.setDeliveredAt(timeSystem.getSimulatedTime());
+        ps.phaseTimer -= simDeltaMinutes;
 
-            dealer.completeDelivery(order.getTotalDistance());
-            dealer.removeOrder(orderId);
+        switch (ps.phase) {
 
-            // Notificar restaurante
-            auto restIt = restaurants.find(order.getRestaurantId());
-            if (restIt != restaurants.end()) {
-                restIt->second.orderDispatched();
-                avlRestaurants.updateScore(
-                    restIt->first,
-                    restIt->second.getPopularityScore()
-                );
+        // ── Fase 1: yendo al restaurante ──────────────────────
+        case DeliveryPhase::HEADING_TO_RESTAURANT:
+            if (ps.phaseTimer <= 0.0) {
+                // Llega al restaurante — actualizar posicion del dealer
+                auto restIt = restaurants.find(order.getRestaurantId());
+                if (restIt != restaurants.end()
+                    && graph.hasNode(restIt->second.getNodeId()))
+                {
+                    dealer.setCurrentNodeId(restIt->second.getNodeId());
+                }
+
+                order.setStatus(OrderStatus::PICKING_UP);
+                dealer.setStatus(DealerStatus::PICKING_UP);
+
+                ps.phase      = DeliveryPhase::PICKING_UP;
+                ps.phaseTimer = Config::DEALER_PICKUP_TIME;
+
+                Logger::info("Dealer " + id
+                             + " llego al restaurante, recogiendo "
+                             + ps.orderId);
             }
+            break;
 
-            // Registrar en historial
-            deliveryHistory.record(DeliveryRecord(
-                order.getId(),
-                order.getRestaurantId(),
-                dealer.getId(),
-                order.getClientNodeId(),
-                timeSystem.getSimulatedTime(),
-                order.waitTime(),
-                order.deliveryTime(),
-                order.getTotalDistance(),
-                order.getPriority()
-            ));
+        // ── Fase 2: esperando en el restaurante ───────────────
+        case DeliveryPhase::PICKING_UP:
+            if (ps.phaseTimer <= 0.0) {
+                // Calcular ruta fresca restaurante → cliente
+                double leg2Time = Config::DEALER_PICKUP_TIME; // fallback
 
-            stats.totalDelivered++;
+                auto restIt = restaurants.find(order.getRestaurantId());
+                if (restIt != restaurants.end()
+                    && graph.hasNode(restIt->second.getNodeId())
+                    && graph.hasNode(order.getClientNodeId()))
+                {
+                    RouteResult leg2 = Dijkstra::compute(
+                        graph,
+                        restIt->second.getNodeId(),
+                        order.getClientNodeId(),
+                        traffic
+                    );
+                    if (leg2.success)
+                        leg2Time = leg2.path.estimatedTime;
+                }
 
-            if (dealer.getActiveOrderIds().empty()) {
-                dealer.setStatus(DealerStatus::IDLE);
-                if (!heapDealers.contains(dealer.getId())) {
-                    heapDealers.push(dealer.getId(), 0.0);
+                order.setStatus(OrderStatus::IN_TRANSIT);
+                dealer.setStatus(DealerStatus::DELIVERING);
+
+                ps.phase      = DeliveryPhase::DELIVERING;
+                ps.phaseTimer = leg2Time;
+
+                Logger::info("Dealer " + id
+                             + " sale del restaurante entregando "
+                             + ps.orderId);
+            }
+            break;
+
+        // ── Fase 3: entregando al cliente ─────────────────────
+        case DeliveryPhase::DELIVERING:
+            if (ps.phaseTimer <= 0.0) {
+                order.setStatus(OrderStatus::DELIVERED);
+                order.setDeliveredAt(timeSystem.getSimulatedTime());
+
+                dealer.completeDelivery(order.getTotalDistance());
+                dealer.removeOrder(ps.orderId);
+
+                auto restIt = restaurants.find(order.getRestaurantId());
+                if (restIt != restaurants.end()) {
+                    restIt->second.orderDispatched();
+                    avlRestaurants.updateScore(
+                        restIt->first,
+                        restIt->second.getPopularityScore()
+                    );
+                }
+
+                deliveryHistory.record(DeliveryRecord(
+                    order.getId(),
+                    order.getRestaurantId(),
+                    dealer.getId(),
+                    order.getClientNodeId(),
+                    timeSystem.getSimulatedTime(),
+                    order.waitTime(),
+                    order.deliveryTime(),
+                    order.getTotalDistance(),
+                    order.getPriority()
+                ));
+
+                stats.totalDelivered++;
+
+                Logger::info("Dealer " + id
+                             + " entrego " + ps.orderId);
+
+                dealerPhases.erase(id);
+
+                if (dealer.getActiveOrderIds().empty()) {
+                    dealer.setStatus(DealerStatus::IDLE);
+                    if (!heapDealers.contains(id))
+                        heapDealers.push(id, 0.0);
                 }
             }
-        } else {
-            order.setEstimatedTime(remaining);
+            break;
         }
     }
 }
@@ -287,16 +396,15 @@ double Simulator::computeDealerScore(
     const Dealer& dealer,
     const std::string& restaurantNodeId
 ) const {
-    constexpr double ALPHA = 0.6; // peso distancia
-    constexpr double BETA  = 0.4; // peso carga
+    constexpr double ALPHA = 0.6;
+    constexpr double BETA  = 0.4;
 
     double availabilityScore = 1.0 - dealer.loadFactor();
-
-    // Distancia estimada con Dijkstra
     double distScore = 1.0;
-    if (!restaurantNodeId.empty() &&
-        graph.hasNode(dealer.getCurrentNodeId()) &&
-        graph.hasNode(restaurantNodeId))
+
+    if (!restaurantNodeId.empty()
+        && graph.hasNode(dealer.getCurrentNodeId())
+        && graph.hasNode(restaurantNodeId))
     {
         TrafficEdgeData traffic = trafficSystem.getCurrentTraffic();
         RouteResult r = Dijkstra::compute(
@@ -305,9 +413,8 @@ double Simulator::computeDealerScore(
             restaurantNodeId,
             traffic
         );
-        if (r.success && r.path.totalCost > 0.0) {
+        if (r.success && r.path.totalCost > 0.0)
             distScore = 1.0 / r.path.totalCost;
-        }
     }
 
     return ALPHA * distScore + BETA * availabilityScore;
@@ -316,7 +423,6 @@ double Simulator::computeDealerScore(
 void Simulator::rebuildDealerHeap(
     const std::string& restaurantNodeId
 ) {
-    // Vaciar y reconstruir con scores frescos
     while (!heapDealers.isEmpty()) heapDealers.pop();
 
     for (const auto& [id, dealer] : dealers) {
@@ -329,14 +435,12 @@ void Simulator::rebuildDealerHeap(
 
 void Simulator::updateStats() {
     stats.activeOrders = 0;
-    for (const auto& [id, o] : orders) {
+    for (const auto& [id, o] : orders)
         if (o.isActive()) stats.activeOrders++;
-    }
 
     stats.idleDealers = 0;
-    for (const auto& [id, d] : dealers) {
+    for (const auto& [id, d] : dealers)
         if (d.isAvailable()) stats.idleDealers++;
-    }
 
     stats.avgDeliveryTime = deliveryHistory.averageDeliveryTime();
     stats.avgWaitTime     = deliveryHistory.averageWaitTime();
@@ -347,15 +451,12 @@ void Simulator::updateStats() {
 const TimeSystem& Simulator::getTimeSystem() const {
     return timeSystem;
 }
-
 const WeatherSystem& Simulator::getWeatherSystem() const {
     return weatherSystem;
 }
-
 const TrafficSystem& Simulator::getTrafficSystem() const {
     return trafficSystem;
 }
-
 EventSystem& Simulator::getEventSystem() {
     return eventSystem;
 }
@@ -377,6 +478,13 @@ const SimStats& Simulator::getStats() const {
     return stats;
 }
 
+const DealerPhaseState* Simulator::getPhase(
+    const std::string& dealerId
+) const {
+    auto it = dealerPhases.find(dealerId);
+    return it != dealerPhases.end() ? &it->second : nullptr;
+}
+
 RouteResult Simulator::getRouteFor(
     const std::string& dealerId
 ) const {
@@ -391,14 +499,36 @@ RouteResult Simulator::getRouteFor(
     if (orderIt == orders.end()) return RouteResult{};
 
     const Order& order = orderIt->second;
+
     auto restIt = restaurants.find(order.getRestaurantId());
     if (restIt == restaurants.end()) return RouteResult{};
+
+    const std::string& restNodeId   = restIt->second.getNodeId();
+    const std::string& clientNodeId = order.getClientNodeId();
+
+    if (!graph.hasNode(restNodeId) || !graph.hasNode(clientNodeId))
+        return RouteResult{};
+
+    TrafficEdgeData traffic = trafficSystem.getCurrentTraffic();
+
+    // Devuelve la ruta del tramo actual segun la fase
+    auto phaseIt = dealerPhases.find(dealerId);
+    if (phaseIt != dealerPhases.end()
+        && phaseIt->second.phase == DeliveryPhase::DELIVERING)
+    {
+        // Tramo 2: restaurante → cliente
+        return Dijkstra::compute(graph, restNodeId, clientNodeId, traffic);
+    }
+
+    // Tramo 1: dealer → restaurante
+    if (!graph.hasNode(dealer.getCurrentNodeId()))
+        return RouteResult{};
 
     return Dijkstra::compute(
         graph,
         dealer.getCurrentNodeId(),
-        order.getClientNodeId(),
-        trafficSystem.getCurrentTraffic()
+        restNodeId,
+        traffic
     );
 }
 
